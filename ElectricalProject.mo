@@ -36,7 +36,7 @@ class ElectricalProject
       Placement(visible = true, transformation(origin = {-30, 52}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     Modelica.Blocks.Continuous.TransferFunction transferFunction4 annotation(
       Placement(visible = true, transformation(origin = {-48, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.RealExpression fo(y = 50) annotation(
+    Modelica.Blocks.Sources.RealExpression fo(y = 50.0) annotation(
       Placement(visible = true, transformation(origin = {-184, 76}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Continuous.TransferFunction transferFunction annotation(
       Placement(visible = true, transformation(origin = {78, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -118,8 +118,13 @@ class ElectricalProject
   end configurationA;
 
   model configurationB
+  Modelica.Blocks.Sources.RealExpression f0(y = 50.0)  annotation(
+      Placement(visible = true, transformation(origin = {-150, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Feedback fb1 annotation(
+      Placement(visible = true, transformation(origin = {-110, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
-
+  connect(f0.y, fb1.u1) annotation(
+      Line(points = {{-138, 30}, {-118, 30}}, color = {0, 0, 127}));
   end configurationB;annotation(
     uses(Modelica(version = "4.0.0")));
 end ElectricalProject;
