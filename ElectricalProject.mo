@@ -20,8 +20,6 @@ class ElectricalProject
       Placement(visible = true, transformation(origin = {-90, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AES.ProcessComponents.Electric.Loads_PAport.Load_prescribed_P load4 annotation(
       Placement(visible = true, transformation(origin = {176, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-    AES.ProcessComponents.Electric.Loads_PAport.Load_prescribed_P load1 annotation(
-      Placement(visible = true, transformation(origin = {178, 26}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     AES.ProcessComponents.Electric.Generators_PAport.Generator_order0_prescribed_P G1 annotation(
       Placement(visible = true, transformation(origin = {120, 26}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Math.Add add2 annotation(
@@ -109,8 +107,6 @@ class ElectricalProject
       Line(points = {{-173, 76}, {-152, 76}}, color = {0, 0, 127}));
     connect(G3.y, Gen3.fg) annotation(
       Line(points = {{89, -66}, {117, -66}, {117, -76}}, color = {0, 0, 127}));
-    connect(G1.port, load1.port) annotation(
-      Line(points = {{130, 26}, {168, 26}}, color = {0, 0, 255}));
     connect(transferFunction3.y, add2.u2) annotation(
       Line(points = {{-11, -72}, {30, -72}}, color = {0, 0, 127}));
     connect(load3.port, Gen3.port) annotation(
