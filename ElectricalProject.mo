@@ -196,7 +196,7 @@ class ElectricalProject
       Placement(visible = true, transformation(origin = {-28, 54}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   AES.ProcessComponents.Electric.Generators_PAport.Generator_order0_prescribed_P Gen3 annotation(
       Placement(visible = true, transformation(origin = {70, -66}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  AES.ProcessComponents.Electric.Loads_PAport.Load_prescribed_P load1 annotation(
+  AES.ProcessComponents.Electric.Loads_PAport.Load_prescribed_P load1(fnom = 50)  annotation(
       Placement(visible = true, transformation(origin = {130, 26}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
   Modelica.Blocks.Continuous.TransferFunction transferFunction2 annotation(
       Placement(visible = true, transformation(origin = {-158, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
