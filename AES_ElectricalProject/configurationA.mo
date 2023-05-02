@@ -1,11 +1,6 @@
 within AES_ElectricalProject;
 
 model configurationA
-  
-  realExpression varLoad1 = (if time < 30*60 or time > 120*60 then 10e6 else 20e6);
-  
-  Modelica.Blocks.Sources.RealExpression if_1 = varLoad1;
-  
   Modelica.Blocks.Continuous.TransferFunction tf_C3(a = {1}, b = {1}) annotation(
     Placement(visible = true, transformation(origin = {-32, -112}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.RealExpression if_3(y = if time < 120*60 then 80e6 else 120e6) annotation(
@@ -60,8 +55,8 @@ model configurationA
     Placement(visible = true, transformation(origin = {66, 16}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback feedback_grid2 annotation(
     Placement(visible = true, transformation(origin = {-160, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.RealExpression if_1(y = varLoad1) annotation(
-  Placement(visible = true, transformation(origin = {208, 56}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression if_1(y = if time < 30*60 or time > 120*60 then 10e6 else 20e6) annotation(
+    Placement(visible = true, transformation(origin = {208, 56}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.TransferFunction tf_C1(a = {1}, b = {1}) annotation(
     Placement(visible = true, transformation(origin = {-122, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback feedback_grid1 annotation(
