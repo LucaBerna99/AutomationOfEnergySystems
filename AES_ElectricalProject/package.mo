@@ -6,5 +6,6 @@ package AES_ElectricalProject
 
 
   annotation(
-    uses(Modelica(version = "4.0.0")));
+    uses(Modelica(version = "4.0.0")),
+  Diagram);
 end AES_ElectricalProject;
