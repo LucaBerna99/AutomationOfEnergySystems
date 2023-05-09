@@ -13,15 +13,15 @@ model configurationA_net
     Placement(visible = true, transformation(origin = {-250, 310}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback fb3 annotation(
     Placement(visible = true, transformation(origin = {-250, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Gain ki1(k = 0.25)  annotation(
+  Modelica.Blocks.Math.Gain ki1(k = 0.75)  annotation(
     Placement(visible = true, transformation(origin = {-190, 370}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Math.Gain ki2(k = 0.25)  annotation(
     Placement(visible = true, transformation(origin = {-230, 370}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  Modelica.Blocks.Math.Gain ki3(k = 0.25)  annotation(
+  Modelica.Blocks.Math.Gain ki3(k = 1)  annotation(
     Placement(visible = true, transformation(origin = {-190, 130}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Continuous.Integrator integrator1(k = 0.25)  annotation(
     Placement(visible = true, transformation(origin = {-250, 410}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.Integrator integrator2(k = 0.25)  annotation(
+  Modelica.Blocks.Continuous.Integrator integrator2(k = 0.02)  annotation(
     Placement(visible = true, transformation(origin = {-250, 170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.TransferFunction kp3(a = {1}, b = {2})  annotation(
     Placement(visible = true, transformation(origin = {-210, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
