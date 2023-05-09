@@ -1,7 +1,0 @@
-within AES_ElectricalProject;
-
-model conf
-  extends Modelica.Icons.Example;
-equation
-
-end conf;

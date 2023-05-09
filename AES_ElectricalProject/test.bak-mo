@@ -1,7 +1,0 @@
-within AES_ElectricalProject;
-
-model test
-  extends Modelica.Icons.Example;
-equation
-
-end test;
