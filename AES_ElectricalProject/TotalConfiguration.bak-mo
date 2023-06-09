@@ -1,0 +1,45 @@
+within AES_ElectricalProject;
+
+
+block TotalConfiguration
+  Modelica.Blocks.Interfaces.BooleanInput u annotation(
+    Placement(visible = true, transformation(origin = {-140, -40}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.IntegerOutput y annotation(
+    Placement(visible = true, transformation(origin = {-30, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+equation
+if u == true then 
+  y = 1;
+else
+  y = 0;
+end if
+
+annotation(
+  
+  Diagram(
+    coordinateSystem(
+      extent = {{-280, -40}, {-120, -80}}), 
+      graphics = {
+        Rectangle(
+          origin = {-200, -60}, 
+          fillColor = {170, 255, 255}, 
+          fillPattern = FillPattern.Solid, 
+          extent = {{-80, 60}, {80, -60}}), 
+    Text(
+      origin = {-201, 10}, 
+      extent = {{-27, 6}, {27, -6}}, 
+      textString = "%name")}),
+    Icon(
+      coordinateSystem(
+      preserveAspectRatio=true,
+      extent = {{-400, -140}, {0, 20}})));
+
+
+annotation(
+    Diagram(
+      coordinateSystem(
+        extent = {{-160, -20}, {-20, -60}})),
+      Icon(
+        graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -120}, extent = {{-100, 10}, {100, -10}}, textString = "Switch")}, coordinateSystem(extent = {{-100, -100}, {100, 100}})));
+            
+            
+end TotalConfiguration;
