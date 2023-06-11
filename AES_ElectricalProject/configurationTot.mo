@@ -7,7 +7,7 @@ model configurationTot
     Placement(visible = true, transformation(origin = {270, -450}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain Pn3(k = 150e6) annotation(
     Placement(visible = true, transformation(origin = {190, -390}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.Integrator confA_integrator2(k = 0.0000592*100) annotation(
+  Modelica.Blocks.Continuous.Integrator confA_integrator2(k = 0.00005922*40) annotation(
     Placement(visible = true, transformation(origin = {-430, -70}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Continuous.TransferFunction g2(a = {5, 1}, b = {1}) annotation(
     Placement(visible = true, transformation(origin = {150, -330}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -31,9 +31,9 @@ model configurationTot
     Placement(visible = true, transformation(origin = {310, -172}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
   Modelica.Blocks.Sources.RealExpression f0(y = 0) annotation(
     Placement(visible = true, transformation(origin = {-710, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Gain confA_ki1(k = 1/3) annotation(
+  Modelica.Blocks.Math.Gain confA_ki1(k = 2/3) annotation(
     Placement(visible = true, transformation(origin = {-510, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  Modelica.Blocks.Math.Gain confA_ki2(k = 2/3) annotation(
+  Modelica.Blocks.Math.Gain confA_ki2(k = 1/3) annotation(
     Placement(visible = true, transformation(origin = {-470, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Continuous.Integrator confA_integrator1(k = 0.000568*10) annotation(
     Placement(visible = true, transformation(origin = {-490, -70}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
@@ -49,13 +49,13 @@ model configurationTot
     Placement(visible = true, transformation(origin = {-530, -170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.TransferFunction confA_kp2(a = {1}, b = {0.469}*5) annotation(
     Placement(visible = true, transformation(origin = {-490, -190}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.TransferFunction confA_kp3(a = {1}, b = {0.05922}*55) annotation(
+  Modelica.Blocks.Continuous.TransferFunction confA_kp3(a = {0.025, 1}, b = {49.75, 1}*0.589244) annotation(
     Placement(visible = true, transformation(origin = {-450, -210}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.TransferFunction confB_kp1(a = {5, 1}, b = {5.2071*10, 5.2071}) annotation(
+  Modelica.Blocks.Continuous.TransferFunction confB_kp1(a = {5*0.1, 1}, b = {5.2071*10, 5.2071}) annotation(
     Placement(visible = true, transformation(origin = {-210, -170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.TransferFunction confB_kp3(a = {10, 1}, b = {-3.2909*20, -3.2909}) annotation(
     Placement(visible = true, transformation(origin = {-130, -210}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.TransferFunction confB_kp2(a = {20, 1}, b = {0.055123*5, 0.055123}*30) annotation(
+  Modelica.Blocks.Continuous.TransferFunction confB_kp2(a = {20*0.1, 1}, b = {0.055123*5, 0.055123}*30) annotation(
     Placement(visible = true, transformation(origin = {-170, -190}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Add ADD_controller1(k1 = total.k, k2 = (1 - total.k))  annotation(
     Placement(visible = true, transformation(origin = {110, -270}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -76,7 +76,7 @@ model configurationTot
   Modelica.Blocks.Math.Add confB_add3 annotation(
     Placement(visible = true, transformation(origin = {-90, -190}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback confA_fb1 annotation(
-    Placement(visible = true, transformation(origin = {-550, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-570, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback confA_fb2 annotation(
     Placement(visible = true, transformation(origin = {-610, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback confB_fb annotation(
@@ -99,12 +99,12 @@ model configurationTot
     Placement(visible = true, transformation(origin = {-270, -170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback confB_3 annotation(
     Placement(visible = true, transformation(origin = {-190, -210}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.TransferFunction confA_net_sub1(a = {30e3*(2*Modelica.Math.asin(1.0)*50)^2}, b = {1*(1 - total.k)}, initType = Modelica.Blocks.Types.Init.InitialOutput) annotation(
-    Placement(visible = true, transformation(origin = {350, -450}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.TransferFunction confA_net_sub2(a = {10e3*(2*Modelica.Math.asin(1.0)*50)^2}, b = {1*(1 - total.k)}, initType = Modelica.Blocks.Types.Init.InitialOutput) annotation(
+  Modelica.Blocks.Continuous.TransferFunction confA_net_sub2(a = {10e3*(2*Modelica.Math.asin(1.0)*50)^2, 0}, b = {1*(1 - total.k)}, initType = Modelica.Blocks.Types.Init.InitialOutput) annotation(
     Placement(visible = true, transformation(origin = {350, -540}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.IntegerConstant total(k = 0)  annotation(
     Placement(visible = true, transformation(origin = {-790, -270}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Continuous.TransferFunction confA_net_sub1(a = {30e3*(2*Modelica.Math.asin(1.0)*50)^2, 0}, b = {1*(1 - total.k)}, initType = Modelica.Blocks.Types.Init.InitialOutput) annotation(
+    Placement(visible = true, transformation(origin = {350, -450}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(AddSub1.y, disturbanceSub1.u1) annotation(
     Line(points = {{281, -450}, {301, -450}}, color = {0, 0, 127}));
@@ -161,7 +161,7 @@ equation
   connect(confB_kp3.y, confB_add3.u2) annotation(
     Line(points = {{-119, -210}, {-111, -210}, {-111, -196}, {-103, -196}}, color = {0, 0, 127}));
   connect(confA_fb1.y, confA_integrator1.u) annotation(
-    Line(points = {{-541, -30}, {-491, -30}, {-491, -58}}, color = {0, 0, 127}));
+    Line(points = {{-561, -30}, {-491, -30}, {-491, -58}}, color = {0, 0, 127}));
   connect(confA_fb2.y, confA_integrator2.u) annotation(
     Line(points = {{-601, 10}, {-430, 10}, {-430, -58}}, color = {0, 0, 127}));
   connect(confB_fb.y, confB_integrator.u) annotation(
@@ -201,7 +201,7 @@ equation
   connect(f0.y, confA_fb2.u1) annotation(
     Line(points = {{-699, 70}, {-660, 70}, {-660, 10}, {-618, 10}}, color = {0, 0, 127}));
   connect(f0.y, confA_fb1.u1) annotation(
-    Line(points = {{-699, 70}, {-660, 70}, {-660, -30}, {-558, -30}}, color = {0, 0, 127}));
+    Line(points = {{-699, 70}, {-660, 70}, {-660, -30}, {-578, -30}}, color = {0, 0, 127}));
   connect(confA_1.y, confA_kp1.u) annotation(
     Line(points = {{-581, -170}, {-542, -170}}, color = {0, 0, 127}));
   connect(confA_3.y, confA_kp3.u) annotation(
@@ -226,18 +226,10 @@ equation
     Line(points = {{-698, 70}, {-308, 70}, {-308, -190}, {-238, -190}}, color = {0, 0, 127}));
   connect(f0.y, confB_3.u1) annotation(
     Line(points = {{-698, 70}, {-308, 70}, {-308, -210}, {-198, -210}}, color = {0, 0, 127}));
-  connect(disturbanceSub1.y, confA_net_sub1.u) annotation(
-    Line(points = {{319, -450}, {337, -450}}, color = {0, 0, 127}));
   connect(disturbanceSub2.y, confA_net_sub2.u) annotation(
     Line(points = {{319, -540}, {337, -540}}, color = {0, 0, 127}));
-  connect(confA_net_sub1.y, confA_2.u2) annotation(
-    Line(points = {{362, -450}, {380, -450}, {380, -480}, {-550, -480}, {-550, -198}}, color = {0, 0, 127}));
-  connect(confA_net_sub1.y, confA_1.u2) annotation(
-    Line(points = {{362, -450}, {380, -450}, {380, -480}, {-590, -480}, {-590, -178}}, color = {0, 0, 127}));
   connect(confA_net_sub2.y, confA_3.u2) annotation(
     Line(points = {{362, -540}, {380, -540}, {380, -580}, {-510, -580}, {-510, -218}}, color = {0, 0, 127}));
-  connect(confA_net_sub1.y, confA_fb1.u2) annotation(
-    Line(points = {{362, -450}, {380, -450}, {380, -480}, {-570, -480}, {-570, -80}, {-550, -80}, {-550, -38}}, color = {0, 0, 127}));
   connect(confA_net_sub2.y, confA_fb2.u2) annotation(
     Line(points = {{362, -540}, {380, -540}, {380, -580}, {-610, -580}, {-610, 2}}, color = {0, 0, 127}));
   connect(confB_net.y, confB_3.u2) annotation(
@@ -248,7 +240,15 @@ equation
     Line(points = {{362, -172}, {380, -172}, {380, -240}, {-270, -240}, {-270, -178}}, color = {0, 0, 127}));
   connect(confB_net.y, confB_fb.u2) annotation(
     Line(points = {{362, -172}, {380, -172}, {380, -240}, {-330, -240}, {-330, 42}}, color = {0, 0, 127}));
+  connect(disturbanceSub1.y, confA_net_sub1.u) annotation(
+    Line(points = {{319, -450}, {337, -450}}, color = {0, 0, 127}));
+  connect(confA_net_sub1.y, confA_2.u2) annotation(
+    Line(points = {{362, -450}, {380, -450}, {380, -480}, {-550, -480}, {-550, -198}}, color = {0, 0, 127}));
+  connect(confA_net_sub1.y, confA_1.u2) annotation(
+    Line(points = {{362, -450}, {380, -450}, {380, -480}, {-590, -480}, {-590, -178}}, color = {0, 0, 127}));
+  connect(confA_net_sub1.y, confA_fb1.u2) annotation(
+    Line(points = {{362, -450}, {380, -450}, {380, -480}, {-570, -480}, {-570, -38}}, color = {0, 0, 127}));
   annotation(
-    Diagram(coordinateSystem(extent = {{-820, 80}, {380, -580}})));
+    Diagram(coordinateSystem(extent = {{-800, 80}, {380, -580}})));
 
 end configurationTot;

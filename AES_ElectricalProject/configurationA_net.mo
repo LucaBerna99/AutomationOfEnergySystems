@@ -13,7 +13,7 @@ model configurationA_net
     Placement(visible = true, transformation(origin = {-110, 270}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.Integrator network_2(k = 1/(10e3*(2*Modelica.Math.asin(1.0)*50)^2)) annotation(
     Placement(visible = true, transformation(origin = {70, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.TransferFunction kp3(a = {1}, b = {0.05922}*55) annotation(
+  Modelica.Blocks.Continuous.TransferFunction kp3(a = {0.025, 1}, b = {49.75, 1}*0.589244) annotation(
     Placement(visible = true, transformation(origin = {-210, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback disturbanceSub1 annotation(
     Placement(visible = true, transformation(origin = {30, 300}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
@@ -21,7 +21,7 @@ model configurationA_net
     Placement(visible = true, transformation(origin = {-290, 170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain Pn2(k = 50e6) annotation(
     Placement(visible = true, transformation(origin = {-70, 270}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.Integrator integrator2(k = 0.0000592*100) annotation(
+  Modelica.Blocks.Continuous.Integrator integrator2(k = 0.00005922*40) annotation(
     Placement(visible = true, transformation(origin = {-250, 170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.Integrator network_1(k = 1/(30e3*(2*Modelica.Math.asin(1.0)*50)^2)) annotation(
     Placement(visible = true, transformation(origin = {70, 300}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
