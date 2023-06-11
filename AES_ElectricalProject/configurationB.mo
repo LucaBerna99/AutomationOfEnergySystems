@@ -3,7 +3,7 @@ within AES_ElectricalProject;
 model configurationB
   Modelica.Blocks.Math.Feedback feedback annotation(
     Placement(visible = true, transformation(origin = {122, -48}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.TransferFunction tf_C1(a = {5, 1}, b = {5.2071*10, 5.2071}) annotation(
+  Modelica.Blocks.Continuous.TransferFunction tf_C1(a = {5*0.1, 1}, b = {5.2071*10, 5.2071}) annotation(
     Placement(visible = true, transformation(origin = {-182, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.TransferFunction tf_g3(a = {20, 1}, b = {150e6}) annotation(
     Placement(visible = true, transformation(origin = {6, -104}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -31,7 +31,7 @@ model configurationB
     Placement(visible = true, transformation(origin = {-94, -104}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback feedback_g1 annotation(
     Placement(visible = true, transformation(origin = {-206, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.TransferFunction tf_C2(a = {20, 1}, b = {0.055123*5, 0.055123}*30) annotation(
+  Modelica.Blocks.Continuous.TransferFunction tf_C2(a = {20*0.1, 1}, b = {0.055123*5, 0.055123}*30) annotation(
     Placement(visible = true, transformation(origin = {-120, -54}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.TransferFunction tf_g2(a = {5, 1}, b = {50e6}) annotation(
     Placement(visible = true, transformation(origin = {6, -48}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
