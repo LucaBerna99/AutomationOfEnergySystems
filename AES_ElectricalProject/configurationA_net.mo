@@ -19,7 +19,7 @@ model configurationA_net
     Placement(visible = true, transformation(origin = {-290, 170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain Pn2(k = 50e6) annotation(
     Placement(visible = true, transformation(origin = {-70, 270}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.Integrator integrator2(k = 0.00005922*40) annotation(
+  Modelica.Blocks.Continuous.Integrator integrator2(k = 0.00005922*80) annotation(
     Placement(visible = true, transformation(origin = {-250, 170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.Integrator network_1(k = 1/(30e3*(2*Modelica.Math.asin(1.0)*50)^2)) annotation(
     Placement(visible = true, transformation(origin = {70, 300}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -41,7 +41,7 @@ model configurationA_net
     Placement(visible = true, transformation(origin = {-110, 330}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain Pn1(k = 100e6) annotation(
     Placement(visible = true, transformation(origin = {-70, 330}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.Integrator integrator1(k = 0.000568*10) annotation(
+  Modelica.Blocks.Continuous.Integrator integrator1(k = 0.000568*20) annotation(
     Placement(visible = true, transformation(origin = {-250, 410}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback fbsub1 annotation(
     Placement(visible = true, transformation(origin = {-290, 410}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -56,23 +56,23 @@ model configurationA_net
   Modelica.Blocks.Sources.RealExpression Pe_sub1(y = if time <= 1800 then 60e6 elseif time <= 3600 then 70e6
    elseif time <= 7200 then 120e6
    elseif time <= 9000 then 110e6 else 60e6)  annotation(
-    Placement(visible = true, transformation(origin = {-10, 352}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Ramp DPe_sub1(duration = 10, height = 0) annotation(
-    Placement(visible = true, transformation(origin = {70, 352}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-10, 370}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Ramp DPe_sub1(duration = 10, height = 5e6) annotation(
+    Placement(visible = true, transformation(origin = {70, 370}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.RealExpression Pe_sub2(y = if time <= 5400 then 120e6 elseif time <= 7200 then 90e6 else 130e6) annotation(
     Placement(visible = true, transformation(origin = {-10, 150}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add3 prim_sec_terz_sub2 annotation(
+  Modelica.Blocks.Math.Add3 prim_sec_terz_sub2(k3 = 0)  annotation(
     Placement(visible = true, transformation(origin = {-150, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.RealExpression terz_sub2(y = 0)  annotation(
     Placement(visible = true, transformation(origin = {-210, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add3 prim_sec_terz_sub1_1 annotation(
+  Modelica.Blocks.Math.Add3 prim_sec_terz_sub1_1(k3 = 0)  annotation(
     Placement(visible = true, transformation(origin = {-150, 330}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add3 prim_sec_terz_sub1_2 annotation(
+  Modelica.Blocks.Math.Add3 prim_sec_terz_sub1_2(k3 = 0)  annotation(
     Placement(visible = true, transformation(origin = {-150, 270}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.RealExpression terz_sub1_1(y = 0.66)  annotation(
-    Placement(visible = true, transformation(origin = {-210, 290}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.RealExpression terz_sub1_2(y = 0.34)  annotation(
     Placement(visible = true, transformation(origin = {-210, 230}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression terz_sub1_1(y = 0.66) annotation(
+    Placement(visible = true, transformation(origin = {-210, 290}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(AddSub1.y, disturbanceSub1.u1) annotation(
     Line(points = {{2, 300}, {22, 300}}, color = {0, 0, 127}));
@@ -148,17 +148,17 @@ equation
     Line(points = {{-198, 310}, {-190, 310}, {-190, 330}, {-162, 330}}, color = {0, 0, 127}));
   connect(kp2.y, prim_sec_terz_sub1_2.u2) annotation(
     Line(points = {{-198, 250}, {-190, 250}, {-190, 270}, {-162, 270}}, color = {0, 0, 127}));
-  connect(terz_sub1_1.y, prim_sec_terz_sub1_1.u3) annotation(
-    Line(points = {{-198, 290}, {-170, 290}, {-170, 322}, {-162, 322}}, color = {0, 0, 127}));
+  connect(DPe_sub2.y, disturbanceSub2.u2) annotation(
+    Line(points = {{60, 150}, {30, 150}, {30, 98}}, color = {0, 0, 127}));
   connect(terz_sub1_2.y, prim_sec_terz_sub1_2.u3) annotation(
     Line(points = {{-198, 230}, {-170, 230}, {-170, 262}, {-162, 262}}, color = {0, 0, 127}));
-  connect(Pe_sub1.y, disturbanceSub1.u2) annotation(
-    Line(points = {{2, 352}, {30, 352}, {30, 308}}, color = {0, 0, 127}));
-  connect(Pe_sub2.y, disturbanceSub2.u2) annotation(
-    Line(points = {{2, 150}, {30, 150}, {30, 98}}, color = {0, 0, 127}));
+  connect(terz_sub1_1.y, prim_sec_terz_sub1_1.u3) annotation(
+    Line(points = {{-198, 290}, {-170, 290}, {-170, 322}, {-162, 322}}, color = {0, 0, 127}));
+  connect(DPe_sub1.y, disturbanceSub1.u2) annotation(
+    Line(points = {{60, 370}, {30, 370}, {30, 308}}, color = {0, 0, 127}));
 protected
   annotation(
-    Diagram(coordinateSystem(extent = {{-380, 420}, {120, 20}})),
+    Diagram(coordinateSystem(extent = {{-480, 420}, {120, 20}})),
     Icon(coordinateSystem(extent = {{-1000, -1000}, {1000, 1000}})),
     experiment(StartTime = 0, StopTime = 2000, Tolerance = 1e-6, Interval = 4),
     __OpenModelica_commandLineOptions = "--matchingAlgorithm=PFPlusExt --indexReductionMethod=dynamicStateSelection -d=initialization,NLSanalyticJacobian",
