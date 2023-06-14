@@ -53,9 +53,11 @@ model configurationA_net
     Placement(visible = true, transformation(origin = {-190, 130}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Continuous.TransferFunction g3(a = {20, 1}, b = {1}) annotation(
     Placement(visible = true, transformation(origin = {-110, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.RealExpression Pe_sub1(y = if time <= 1800 then 60e6 elseif time <= 3600 then 70e6
-   elseif time <= 7200 then 120e6
-   elseif time <= 9000 then 110e6 else 60e6)  annotation(
+  Modelica.Blocks.Sources.RealExpression Pe_sub1(y = if time <= 10e-100 then 0 elseif time <= 1800 then 170e6
+   elseif time <= 3600 then 180e6
+   elseif time <= 5400 then 230e6
+  elseif time <= 7200 then 210e6
+  elseif time <= 9000 then 240e6 else 190e6)  annotation(
     Placement(visible = true, transformation(origin = {-10, 370}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.Ramp DPe_sub1(duration = 10, height = 5e6) annotation(
     Placement(visible = true, transformation(origin = {70, 370}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
