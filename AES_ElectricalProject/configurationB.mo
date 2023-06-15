@@ -15,11 +15,11 @@ model configurationB
     Placement(visible = true, transformation(origin = {-170, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain gain1(k = 0.4) annotation(
     Placement(visible = true, transformation(origin = {-150, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  Modelica.Blocks.Continuous.TransferFunction network(a = {40*(2*2*Modelica.Math.asin(1.0)*50)^2, 0}, b = {1}, initType = Modelica.Blocks.Types.Init.InitialOutput) annotation(
+  Modelica.Blocks.Continuous.TransferFunction grid(a = {40*(2*2*Modelica.Math.asin(1.0)*50)^2, 0}, b = {1}, initType = Modelica.Blocks.Types.Init.InitialOutput) annotation(
     Placement(visible = true, transformation(origin = {210, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback feedback_g2 annotation(
     Placement(visible = true, transformation(origin = {-190, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Continuous.Integrator integrator(k = 79/(416e4)*200, y_start = 0) annotation(
+  Modelica.Blocks.Continuous.Integrator integrator(k = 79/(416e4)*400, y_start = 0) annotation(
     Placement(visible = true, transformation(origin = {-190, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain gain2(k = 0.2) annotation(
     Placement(visible = true, transformation(origin = {-100, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
@@ -57,9 +57,9 @@ model configurationB
     Placement(visible = true, transformation(origin = {50, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain Pn3(k = 150e6)  annotation(
     Placement(visible = true, transformation(origin = {50, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add3 prim_sec_terz_3 annotation(
+  Modelica.Blocks.Math.Add3 prim_sec_terz_3(k3 = 0)  annotation(
     Placement(visible = true, transformation(origin = {-30, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add3 prim_sec_terz_2 annotation(
+  Modelica.Blocks.Math.Add3 prim_sec_terz_2(k3 = 0)  annotation(
     Placement(visible = true, transformation(origin = {-70, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.TransferFunction tf_g1(a = {10, 1}, b = {1}, initType = Modelica.Blocks.Types.Init.InitialState)  annotation(
     Placement(visible = true, transformation(origin = {10, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -68,7 +68,7 @@ model configurationB
    elseif time <= 7200 then 0.19
    elseif time <= 9000 then 0.26 else 0.19) annotation(
     Placement(visible = true, transformation(origin = {-170, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add3 prim_sec_terz_1 annotation(
+  Modelica.Blocks.Math.Add3 prim_sec_terz_1(k3 = 0)  annotation(
     Placement(visible = true, transformation(origin = {-130, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback feedback1 annotation(
     Placement(visible = true, transformation(origin = {-210, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -93,7 +93,7 @@ equation
     Line(points = {{-221, 50}, {-202, 50}}, color = {0, 0, 127}));
   connect(add3.y, feedback.u1) annotation(
     Line(points = {{121, -50}, {152, -50}}, color = {0, 0, 127}));
-  connect(feedback.y, network.u) annotation(
+  connect(feedback.y, grid.u) annotation(
     Line(points = {{169, -50}, {198, -50}}, color = {0, 0, 127}));
   connect(tf_g3.y, Pn3.u) annotation(
     Line(points = {{22, -90}, {38, -90}}, color = {0, 0, 127}));
@@ -105,11 +105,11 @@ equation
     Line(points = {{62, -50}, {98, -50}}, color = {0, 0, 127}));
   connect(Pn3.y, add3.u3) annotation(
     Line(points = {{62, -90}, {80, -90}, {80, -58}, {98, -58}}, color = {0, 0, 127}));
-  connect(network.y, feedback_g3.u2) annotation(
+  connect(grid.y, feedback_g3.u2) annotation(
     Line(points = {{222, -50}, {260, -50}, {260, -160}, {-170, -160}, {-170, -98}}, color = {0, 0, 127}));
-  connect(network.y, feedback_g2.u2) annotation(
+  connect(grid.y, feedback_g2.u2) annotation(
     Line(points = {{222, -50}, {260, -50}, {260, -160}, {-190, -160}, {-190, -58}}, color = {0, 0, 127}));
-  connect(network.y, feedback_confB.u2) annotation(
+  connect(grid.y, feedback_confB.u2) annotation(
     Line(points = {{222, -50}, {260, -50}, {260, -160}, {-230, -160}, {-230, 42}}, color = {0, 0, 127}));
   connect(gain3.y, prim_sec_terz_3.u1) annotation(
     Line(points = {{-50, 19}, {-50, -82}, {-42, -82}}, color = {0, 0, 127}));
@@ -127,8 +127,6 @@ equation
     Line(points = {{-118, -70}, {-100, -70}, {-100, -58}, {-82, -58}}, color = {0, 0, 127}));
   connect(terz_3.y, prim_sec_terz_3.u3) annotation(
     Line(points = {{-78, -110}, {-60, -110}, {-60, -98}, {-42, -98}}, color = {0, 0, 127}));
-  connect(Pe_confB.y, feedback.u2) annotation(
-    Line(points = {{142, -10}, {160, -10}, {160, -42}}, color = {0, 0, 127}));
   connect(tf_g1.y, Pn1.u) annotation(
     Line(points = {{22, -10}, {38, -10}}, color = {0, 0, 127}));
   connect(tf_C1.y, prim_sec_terz_1.u2) annotation(
@@ -141,10 +139,12 @@ equation
     Line(points = {{-200, -10}, {-182, -10}}, color = {0, 0, 127}));
   connect(fo.y, feedback1.u1) annotation(
     Line(points = {{-258, 50}, {-250, 50}, {-250, -10}, {-218, -10}}, color = {0, 0, 127}));
-  connect(network.y, feedback1.u2) annotation(
+  connect(grid.y, feedback1.u2) annotation(
     Line(points = {{222, -50}, {260, -50}, {260, -160}, {-210, -160}, {-210, -18}}, color = {0, 0, 127}));
   connect(terz_1.y, prim_sec_terz_1.u3) annotation(
     Line(points = {{-158, -30}, {-150, -30}, {-150, -18}, {-142, -18}}, color = {0, 0, 127}));
+  connect(ramp.y, feedback.u2) annotation(
+    Line(points = {{180, -8}, {160, -8}, {160, -42}}, color = {0, 0, 127}));
   annotation(
     Diagram(coordinateSystem(extent = {{-280, 60}, {260, -160}})));
 end configurationB;
