@@ -1,6 +1,6 @@
 within AES_ElectricalProject;
 
-model configurationB
+model configurationB_load
   Modelica.Blocks.Math.Feedback feedback annotation(
     Placement(visible = true, transformation(origin = {160, -50}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
   Modelica.Blocks.Continuous.TransferFunction tf_C1(a = {5*0.1, 1}, b = {5.2071*10, 5.2071}, y_start = 0) annotation(
@@ -33,26 +33,43 @@ model configurationB
     Placement(visible = true, transformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain gain3(k = 0.4) annotation(
     Placement(visible = true, transformation(origin = {-50, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+  Modelica.Blocks.Sources.RealExpression Pe_confB(y = if time <= 10e-100 then 0 elseif time <= 1800 then 170e6
+   elseif time <= 3600 then 180e6
+   elseif time <= 5400 then 230e6
+   elseif time <= 7200 then 210e6
+   elseif time <= 9000 then 240e6 else 190e6)  annotation(
+    Placement(visible = true, transformation(origin = {130, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression terz_2(y = if time <= 1800 then 0.29 elseif time <= 3600 then 0.28
+  elseif time <= 5400 then 0.22
+  elseif time <= 7200 then 0.24
+  elseif time <= 9000 then 0.21 else 0.26)  annotation(
+    Placement(visible = true, transformation(origin = {-130, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression terz_3(y = if time <= 1800 then 0.64 elseif time <= 3600 then 0.62
+  elseif time <= 5400 then 0.54
+  elseif time <= 7200 then 0.57
+  elseif time <= 9000 then 0.53 else 0.60)  annotation(
+    Placement(visible = true, transformation(origin = {-90, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain Pn1(k = 100e6)  annotation(
     Placement(visible = true, transformation(origin = {50, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain Pn2(k = 50e6)  annotation(
     Placement(visible = true, transformation(origin = {50, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain Pn3(k = 150e6)  annotation(
     Placement(visible = true, transformation(origin = {50, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Add3 prim_sec_terz_3(k3 = 0)  annotation(
+    Placement(visible = true, transformation(origin = {-30, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Add3 prim_sec_terz_2(k3 = 0)  annotation(
+    Placement(visible = true, transformation(origin = {-70, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.TransferFunction tf_g1(a = {10, 1}, b = {1}, initType = Modelica.Blocks.Types.Init.InitialState)  annotation(
     Placement(visible = true, transformation(origin = {10, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression terz_1(y = if time <= 1800 then 0.07 elseif time <= 3600 then 0.1
+   elseif time <= 5400 then 0.24
+   elseif time <= 7200 then 0.19
+   elseif time <= 9000 then 0.26 else 0.19) annotation(
+    Placement(visible = true, transformation(origin = {-170, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Add3 prim_sec_terz_1(k3 = 0)  annotation(
+    Placement(visible = true, transformation(origin = {-130, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback feedback1 annotation(
     Placement(visible = true, transformation(origin = {-210, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add prim_sec_1 annotation(
-    Placement(visible = true, transformation(origin = {-130, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add prim_sec_2 annotation(
-    Placement(visible = true, transformation(origin = {-70, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add prim_sec_3 annotation(
-    Placement(visible = true, transformation(origin = {-30, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Ramp DPe_sub1(duration = 10, height = 5e6) annotation(
-    Placement(visible = true, transformation(origin = {-10, 350}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Ramp DPe(duration = 10, height = 5e6)  annotation(
-    Placement(visible = true, transformation(origin = {130, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(feedback_g2.u1, fo.y) annotation(
     Line(points = {{-198, -50}, {-250, -50}, {-250, 50}, {-259, 50}}, color = {0, 0, 127}));
@@ -92,34 +109,40 @@ equation
     Line(points = {{222, -50}, {260, -50}, {260, -160}, {-190, -160}, {-190, -58}}, color = {0, 0, 127}));
   connect(grid.y, feedback_confB.u2) annotation(
     Line(points = {{222, -50}, {260, -50}, {260, -160}, {-230, -160}, {-230, 42}}, color = {0, 0, 127}));
+  connect(gain3.y, prim_sec_terz_3.u1) annotation(
+    Line(points = {{-50, 19}, {-50, -82}, {-42, -82}}, color = {0, 0, 127}));
+  connect(prim_sec_terz_3.y, tf_g3.u) annotation(
+    Line(points = {{-19, -90}, {-2, -90}}, color = {0, 0, 127}));
+  connect(tf_C3.y, prim_sec_terz_3.u2) annotation(
+    Line(points = {{-78, -90}, {-42, -90}}, color = {0, 0, 127}));
+  connect(prim_sec_terz_2.y, tf_g2.u) annotation(
+    Line(points = {{-59, -50}, {-2, -50}}, color = {0, 0, 127}));
+  connect(gain2.y, prim_sec_terz_2.u1) annotation(
+    Line(points = {{-100, 19}, {-100, -42}, {-82, -42}}, color = {0, 0, 127}));
+  connect(tf_C2.y, prim_sec_terz_2.u2) annotation(
+    Line(points = {{-118, -50}, {-82, -50}}, color = {0, 0, 127}));
+  connect(terz_2.y, prim_sec_terz_2.u3) annotation(
+    Line(points = {{-118, -70}, {-100, -70}, {-100, -58}, {-82, -58}}, color = {0, 0, 127}));
+  connect(terz_3.y, prim_sec_terz_3.u3) annotation(
+    Line(points = {{-78, -110}, {-60, -110}, {-60, -98}, {-42, -98}}, color = {0, 0, 127}));
   connect(tf_g1.y, Pn1.u) annotation(
     Line(points = {{22, -10}, {38, -10}}, color = {0, 0, 127}));
+  connect(tf_C1.y, prim_sec_terz_1.u2) annotation(
+    Line(points = {{-158, -10}, {-142, -10}}, color = {0, 0, 127}));
+  connect(gain1.y, prim_sec_terz_1.u1) annotation(
+    Line(points = {{-150, 20}, {-150, -2}, {-142, -2}}, color = {0, 0, 127}));
+  connect(prim_sec_terz_1.y, tf_g1.u) annotation(
+    Line(points = {{-118, -10}, {-2, -10}}, color = {0, 0, 127}));
   connect(feedback1.y, tf_C1.u) annotation(
     Line(points = {{-200, -10}, {-182, -10}}, color = {0, 0, 127}));
   connect(fo.y, feedback1.u1) annotation(
     Line(points = {{-258, 50}, {-250, 50}, {-250, -10}, {-218, -10}}, color = {0, 0, 127}));
   connect(grid.y, feedback1.u2) annotation(
     Line(points = {{222, -50}, {260, -50}, {260, -160}, {-210, -160}, {-210, -18}}, color = {0, 0, 127}));
-  connect(gain1.y, prim_sec_1.u1) annotation(
-    Line(points = {{-150, 20}, {-150, -4}, {-142, -4}}, color = {0, 0, 127}));
-  connect(gain2.y, prim_sec_2.u1) annotation(
-    Line(points = {{-100, 20}, {-100, -44}, {-82, -44}}, color = {0, 0, 127}));
-  connect(gain3.y, prim_sec_3.u1) annotation(
-    Line(points = {{-50, 20}, {-50, -84}, {-42, -84}}, color = {0, 0, 127}));
-  connect(tf_C3.y, prim_sec_3.u2) annotation(
-    Line(points = {{-78, -90}, {-50, -90}, {-50, -96}, {-42, -96}}, color = {0, 0, 127}));
-  connect(tf_C2.y, prim_sec_2.u2) annotation(
-    Line(points = {{-118, -50}, {-100, -50}, {-100, -56}, {-82, -56}}, color = {0, 0, 127}));
-  connect(tf_C1.y, prim_sec_1.u2) annotation(
-    Line(points = {{-158, -10}, {-150, -10}, {-150, -16}, {-142, -16}}, color = {0, 0, 127}));
-  connect(prim_sec_1.y, tf_g1.u) annotation(
-    Line(points = {{-118, -10}, {-2, -10}}, color = {0, 0, 127}));
-  connect(prim_sec_2.y, tf_g2.u) annotation(
-    Line(points = {{-58, -50}, {-2, -50}}, color = {0, 0, 127}));
-  connect(prim_sec_3.y, tf_g3.u) annotation(
-    Line(points = {{-18, -90}, {-2, -90}}, color = {0, 0, 127}));
-  connect(DPe.y, feedback.u2) annotation(
+  connect(terz_1.y, prim_sec_terz_1.u3) annotation(
+    Line(points = {{-158, -30}, {-150, -30}, {-150, -18}, {-142, -18}}, color = {0, 0, 127}));
+  connect(Pe_confB.y, feedback.u2) annotation(
     Line(points = {{142, -10}, {160, -10}, {160, -42}}, color = {0, 0, 127}));
   annotation(
     Diagram(coordinateSystem(extent = {{-280, 60}, {260, -160}})));
-end configurationB;
+end configurationB_load;

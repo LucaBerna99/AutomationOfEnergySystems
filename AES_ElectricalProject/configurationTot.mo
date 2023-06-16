@@ -63,12 +63,6 @@ model configurationTot
     Placement(visible = true, transformation(origin = {-610, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback confB_fb annotation(
     Placement(visible = true, transformation(origin = {-330, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Ramp confB_DPe(duration = 10, height = 5e6) annotation(
-    Placement(visible = true, transformation(origin = {270, -122}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Ramp confA_DPe_sub1(duration = 10, height = 5e6) annotation(
-    Placement(visible = true, transformation(origin = {270, -410}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Ramp confA_DPe_sub2(duration = 10, height = 5e6) annotation(
-    Placement(visible = true, transformation(origin = {270, -530}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback confA_1 annotation(
     Placement(visible = true, transformation(origin = {-590, -170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback confA_2 annotation(
@@ -100,7 +94,7 @@ model configurationTot
    elseif time <= 5400 then 230e6
    elseif time <= 7200 then 210e6
    elseif time <= 9000 then 240e6 else 190e6) annotation(
-    Placement(visible = true, transformation(origin = {270, -100}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {270, -130}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.RealExpression realExpression(y = if time <= 10e-100 then 0 elseif time <= 10e-100 then 0
    elseif time <= 1800 then 170e6
    elseif time <= 3600 then 180e6
@@ -110,7 +104,7 @@ model configurationTot
     Placement(visible = true, transformation(origin = {270, -380}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.RealExpression realExpression1(y = if time <= 10e-100 then 0 elseif time <= 5400 then 120e6
    elseif time <= 7200 then 90e6 else 130e6) annotation(
-    Placement(visible = true, transformation(origin = {270, -500}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {270, -530}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Add3 confA_prim_sec_terz1 annotation(
     Placement(visible = true, transformation(origin = {-490, -150}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Add3 confA_prim_sec_terz2 annotation(
@@ -161,9 +155,9 @@ model configurationTot
   Modelica.Blocks.Logical.Switch confA_switch_out2 annotation(
     Placement(visible = true, transformation(origin = {386, -540}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.RealExpression zero_confA_sub2 annotation(
-    Placement(visible = true, transformation(origin = {326, -510}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {330, -510}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.BooleanExpression expr_boolSw_confA_sub2(y = total.y) annotation(
-    Placement(visible = true, transformation(origin = {326, -530}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {330, -530}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.TransferFunction confA__sub2_OUT(a = {10e3*(2*Modelica.Math.asin(1.0)*50)^2, 0}, b = {1}, initType = Modelica.Blocks.Types.Init.InitialOutput) annotation(
     Placement(visible = true, transformation(origin = {430, -540}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
@@ -297,10 +291,6 @@ equation
     Line(points = {{202, -370}, {220, -370}, {220, -172}, {258, -172}}, color = {0, 0, 127}));
   connect(Pn3.y, add31.u3) annotation(
     Line(points = {{202, -430}, {220, -430}, {220, -180}, {258, -180}}, color = {0, 0, 127}));
-  connect(confB_Pe.y, feedback.u2) annotation(
-    Line(points = {{282, -100}, {310, -100}, {310, -164}}, color = {0, 0, 127}));
-  connect(realExpression1.y, disturbanceSub2.u2) annotation(
-    Line(points = {{282, -500}, {310, -500}, {310, -552}}, color = {0, 0, 127}));
   connect(realExpression.y, disturbanceSub1.u2) annotation(
     Line(points = {{282, -380}, {310, -380}, {310, -442}}, color = {0, 0, 127}));
   connect(expr_boolSw_confB.y, confB_switch_out.u2) annotation(
@@ -328,9 +318,9 @@ equation
   connect(confA_switch_out1.y, confA__sub1_OUT.u) annotation(
     Line(points = {{401, -440}, {418, -440}}, color = {0, 0, 127}));
   connect(expr_boolSw_confA_sub2.y, confA_switch_out2.u2) annotation(
-    Line(points = {{337, -530}, {355, -530}, {355, -540}, {373, -540}}, color = {255, 0, 255}));
+    Line(points = {{341, -530}, {355, -530}, {355, -540}, {373, -540}}, color = {255, 0, 255}));
   connect(zero_confA_sub2.y, confA_switch_out2.u1) annotation(
-    Line(points = {{337, -510}, {355, -510}, {355, -532}, {373, -532}}, color = {0, 0, 127}));
+    Line(points = {{341, -510}, {355, -510}, {355, -532}, {373, -532}}, color = {0, 0, 127}));
   connect(confA_switch_out2.y, confA__sub2_OUT.u) annotation(
     Line(points = {{397, -540}, {417, -540}}, color = {0, 0, 127}));
   connect(disturbanceSub2.y, confA_switch_out2.u3) annotation(
@@ -345,6 +335,10 @@ equation
     Line(points = {{442, -540}, {460, -540}, {460, -580}, {-610, -580}, {-610, 2}}, color = {0, 0, 127}));
   connect(confA__sub1_OUT.y, confA_fb1.u2) annotation(
     Line(points = {{442, -440}, {460, -440}, {460, -480}, {-570, -480}, {-570, -38}}, color = {0, 0, 127}));
+  connect(realExpression1.y, disturbanceSub2.u2) annotation(
+    Line(points = {{282, -530}, {310, -530}, {310, -552}}, color = {0, 0, 127}));
+  connect(confB_Pe.y, feedback.u2) annotation(
+    Line(points = {{282, -130}, {310, -130}, {310, -164}}, color = {0, 0, 127}));
   annotation(
-    Diagram(coordinateSystem(extent = {{-800, 80}, {460, -600}})));
+    Diagram(coordinateSystem(extent = {{-800, 80}, {460, -580}})));
 end configurationTot;

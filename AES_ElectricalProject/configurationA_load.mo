@@ -1,8 +1,6 @@
 within AES_ElectricalProject;
 
-model configurationA
-  Modelica.Blocks.Sources.Ramp DPe_sub2(duration = 10, height = 5e6) annotation(
-    Placement(visible = true, transformation(origin = {-10, 130}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+model configurationA_load
   Modelica.Blocks.Math.Gain ki2(k = 1/3) annotation(
     Placement(visible = true, transformation(origin = {-230, 370}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Math.Gain Pn3(k = 150e6) annotation(
@@ -53,14 +51,26 @@ model configurationA
     Placement(visible = true, transformation(origin = {-190, 130}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Continuous.TransferFunction g3(a = {20, 1}, b = {1}) annotation(
     Placement(visible = true, transformation(origin = {-110, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add prim_sec_1 annotation(
-    Placement(visible = true, transformation(origin = {-170, 330}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add prim_sec_2 annotation(
-    Placement(visible = true, transformation(origin = {-170, 270}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add prim_sec_3 annotation(
-    Placement(visible = true, transformation(origin = {-170, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Ramp DPe_sub1(duration = 10, height = 5e6) annotation(
-    Placement(visible = true, transformation(origin = {-10, 350}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression Pe_sub1(y = if time <= 10e-100 then 0 elseif time <= 1800 then 170e6
+   elseif time <= 3600 then 180e6
+   elseif time <= 5400 then 230e6
+  elseif time <= 7200 then 210e6
+  elseif time <= 9000 then 240e6 else 190e6)  annotation(
+    Placement(visible = true, transformation(origin = {-10, 370}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression Pe_sub2(y = if time <= 5400 then 120e6 elseif time <= 7200 then 90e6 else 130e6) annotation(
+    Placement(visible = true, transformation(origin = {-10, 150}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Add3 prim_sec_terz_sub2 annotation(
+    Placement(visible = true, transformation(origin = {-150, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression terz_sub2(y = 0)  annotation(
+    Placement(visible = true, transformation(origin = {-210, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Add3 prim_sec_terz_sub1_1 annotation(
+    Placement(visible = true, transformation(origin = {-150, 330}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Add3 prim_sec_terz_sub1_2 annotation(
+    Placement(visible = true, transformation(origin = {-150, 270}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression terz_sub1_2(y = 0.34)  annotation(
+    Placement(visible = true, transformation(origin = {-210, 230}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.RealExpression terz_sub1_1(y = 0.66) annotation(
+    Placement(visible = true, transformation(origin = {-210, 290}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(AddSub1.y, disturbanceSub1.u1) annotation(
     Line(points = {{2, 300}, {22, 300}}, color = {0, 0, 127}));
@@ -116,28 +126,34 @@ equation
     Line(points = {{-98, 270}, {-82, 270}}, color = {0, 0, 127}));
   connect(disturbanceSub1.y, subgrid_1.u) annotation(
     Line(points = {{40, 300}, {58, 300}}, color = {0, 0, 127}));
-  connect(DPe_sub2.y, disturbanceSub2.u2) annotation(
-    Line(points = {{2, 130}, {30, 130}, {30, 98}}, color = {0, 0, 127}));
-  connect(prim_sec_3.y, g3.u) annotation(
-    Line(points = {{-158, 90}, {-122, 90}}, color = {0, 0, 127}));
-  connect(prim_sec_1.y, g1.u) annotation(
-    Line(points = {{-158, 330}, {-122, 330}}, color = {0, 0, 127}));
-  connect(prim_sec_2.y, g2.u) annotation(
-    Line(points = {{-158, 270}, {-122, 270}}, color = {0, 0, 127}));
-  connect(ki3.y, prim_sec_3.u1) annotation(
-    Line(points = {{-190, 120}, {-190, 96}, {-182, 96}}, color = {0, 0, 127}));
-  connect(kp3.y, prim_sec_3.u2) annotation(
-    Line(points = {{-198, 70}, {-190, 70}, {-190, 84}, {-182, 84}}, color = {0, 0, 127}));
-  connect(kp2.y, prim_sec_2.u2) annotation(
-    Line(points = {{-198, 250}, {-190, 250}, {-190, 264}, {-182, 264}}, color = {0, 0, 127}));
-  connect(ki2.y, prim_sec_2.u1) annotation(
-    Line(points = {{-230, 360}, {-230, 276}, {-182, 276}}, color = {0, 0, 127}));
-  connect(ki1.y, prim_sec_1.u1) annotation(
-    Line(points = {{-190, 360}, {-190, 336}, {-182, 336}}, color = {0, 0, 127}));
-  connect(kp1.y, prim_sec_1.u2) annotation(
-    Line(points = {{-198, 310}, {-190, 310}, {-190, 324}, {-182, 324}}, color = {0, 0, 127}));
-  connect(DPe_sub1.y, disturbanceSub1.u2) annotation(
-    Line(points = {{2, 350}, {30, 350}, {30, 308}}, color = {0, 0, 127}));
+  connect(kp3.y, prim_sec_terz_sub2.u2) annotation(
+    Line(points = {{-198, 70}, {-180, 70}, {-180, 90}, {-162, 90}}, color = {0, 0, 127}));
+  connect(ki3.y, prim_sec_terz_sub2.u1) annotation(
+    Line(points = {{-190, 120}, {-190, 98}, {-162, 98}}, color = {0, 0, 127}));
+  connect(terz_sub2.y, prim_sec_terz_sub2.u3) annotation(
+    Line(points = {{-199, 50}, {-172, 50}, {-172, 82}, {-162, 82}}, color = {0, 0, 127}));
+  connect(prim_sec_terz_sub2.y, g3.u) annotation(
+    Line(points = {{-138, 90}, {-122, 90}}, color = {0, 0, 127}));
+  connect(prim_sec_terz_sub1_2.y, g2.u) annotation(
+    Line(points = {{-138, 270}, {-122, 270}}, color = {0, 0, 127}));
+  connect(prim_sec_terz_sub1_1.y, g1.u) annotation(
+    Line(points = {{-138, 330}, {-122, 330}}, color = {0, 0, 127}));
+  connect(ki1.y, prim_sec_terz_sub1_1.u1) annotation(
+    Line(points = {{-190, 360}, {-190, 338}, {-162, 338}}, color = {0, 0, 127}));
+  connect(ki2.y, prim_sec_terz_sub1_2.u1) annotation(
+    Line(points = {{-230, 360}, {-230, 278}, {-162, 278}}, color = {0, 0, 127}));
+  connect(kp1.y, prim_sec_terz_sub1_1.u2) annotation(
+    Line(points = {{-198, 310}, {-190, 310}, {-190, 330}, {-162, 330}}, color = {0, 0, 127}));
+  connect(kp2.y, prim_sec_terz_sub1_2.u2) annotation(
+    Line(points = {{-198, 250}, {-190, 250}, {-190, 270}, {-162, 270}}, color = {0, 0, 127}));
+  connect(terz_sub1_2.y, prim_sec_terz_sub1_2.u3) annotation(
+    Line(points = {{-198, 230}, {-170, 230}, {-170, 262}, {-162, 262}}, color = {0, 0, 127}));
+  connect(terz_sub1_1.y, prim_sec_terz_sub1_1.u3) annotation(
+    Line(points = {{-198, 290}, {-170, 290}, {-170, 322}, {-162, 322}}, color = {0, 0, 127}));
+  connect(Pe_sub2.y, disturbanceSub2.u2) annotation(
+    Line(points = {{2, 150}, {30, 150}, {30, 98}}, color = {0, 0, 127}));
+  connect(Pe_sub1.y, disturbanceSub1.u2) annotation(
+    Line(points = {{2, 370}, {30, 370}, {30, 308}}, color = {0, 0, 127}));
 protected
   annotation(
     Diagram(coordinateSystem(extent = {{-380, 420}, {120, 20}})),
@@ -145,4 +161,4 @@ protected
     experiment(StartTime = 0, StopTime = 2000, Tolerance = 1e-6, Interval = 4),
     __OpenModelica_commandLineOptions = "--matchingAlgorithm=PFPlusExt --indexReductionMethod=dynamicStateSelection -d=initialization,NLSanalyticJacobian",
     __OpenModelica_simulationFlags(lv = "LOG_STATS", s = "dassl"));
-end configurationA;
+end configurationA_load;
