@@ -76,7 +76,7 @@ model configurationTot
   Modelica.Blocks.Math.Feedback confB_3 annotation(
     Placement(visible = true, transformation(origin = {-190, -248}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.BooleanExpression total(y = if time < 5000 then false else true) annotation(
-    Placement(visible = true, transformation(origin = {-790, -250}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {50, 28}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Logical.Switch sw1 annotation(
     Placement(visible = true, transformation(origin = {110, -310}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Logical.Switch sw2 annotation(
@@ -340,5 +340,6 @@ equation
   connect(confB_Pe.y, feedback.u2) annotation(
     Line(points = {{282, -130}, {310, -130}, {310, -164}}, color = {0, 0, 127}));
   annotation(
-    Diagram(coordinateSystem(extent = {{-800, 80}, {460, -580}})));
+    Diagram(coordinateSystem(extent = {{-720, 80}, {460, -580}})),
+  Icon(coordinateSystem(extent = {{-820, -580}, {460, 80}})));
 end configurationTot;

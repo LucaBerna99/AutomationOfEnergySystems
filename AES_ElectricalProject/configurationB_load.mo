@@ -13,7 +13,7 @@ model configurationB_load
     Placement(visible = true, transformation(origin = {-270, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback feedback_g3 annotation(
     Placement(visible = true, transformation(origin = {-170, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Gain gain1(k = 0.4) annotation(
+  Modelica.Blocks.Math.Gain beta1(k = 0.4) annotation(
     Placement(visible = true, transformation(origin = {-150, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Continuous.TransferFunction grid(a = {40*(2*2*Modelica.Math.asin(1.0)*50)^2, 0}, b = {1}, initType = Modelica.Blocks.Types.Init.InitialOutput) annotation(
     Placement(visible = true, transformation(origin = {210, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -21,7 +21,7 @@ model configurationB_load
     Placement(visible = true, transformation(origin = {-190, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Continuous.Integrator integrator(k = 79/(416e4)*400, y_start = 0) annotation(
     Placement(visible = true, transformation(origin = {-190, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Gain gain2(k = 0.2) annotation(
+  Modelica.Blocks.Math.Gain beta2(k = 0.2) annotation(
     Placement(visible = true, transformation(origin = {-100, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Continuous.TransferFunction tf_C3(a = {10, 1}, b = {-3.2909*20, -3.2909}) annotation(
     Placement(visible = true, transformation(origin = {-90, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -31,7 +31,7 @@ model configurationB_load
     Placement(visible = true, transformation(origin = {10, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Add3 add3 annotation(
     Placement(visible = true, transformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Gain gain3(k = 0.4) annotation(
+  Modelica.Blocks.Math.Gain beta3(k = 0.4) annotation(
     Placement(visible = true, transformation(origin = {-50, 30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Sources.RealExpression Pe_confB(y = if time <= 10e-100 then 0 elseif time <= 1800 then 170e6
    elseif time <= 3600 then 180e6
@@ -77,13 +77,13 @@ equation
     Line(points = {{-259, 50}, {-238, 50}}, color = {0, 0, 127}));
   connect(feedback_g3.u1, fo.y) annotation(
     Line(points = {{-178, -90}, {-250, -90}, {-250, 50}, {-259, 50}}, color = {0, 0, 127}));
-  connect(gain3.u, integrator.y) annotation(
+  connect(beta3.u, integrator.y) annotation(
     Line(points = {{-50, 42}, {-50, 50}, {-179, 50}}, color = {0, 0, 127}));
   connect(feedback_g2.y, tf_C2.u) annotation(
     Line(points = {{-181, -50}, {-142, -50}}, color = {0, 0, 127}));
-  connect(gain2.u, integrator.y) annotation(
+  connect(beta2.u, integrator.y) annotation(
     Line(points = {{-100, 42}, {-100, 50}, {-179, 50}}, color = {0, 0, 127}));
-  connect(integrator.y, gain1.u) annotation(
+  connect(integrator.y, beta1.u) annotation(
     Line(points = {{-179, 50}, {-150, 50}, {-150, 42}}, color = {0, 0, 127}));
   connect(feedback_g3.y, tf_C3.u) annotation(
     Line(points = {{-161, -90}, {-102, -90}}, color = {0, 0, 127}));
@@ -109,7 +109,7 @@ equation
     Line(points = {{222, -50}, {260, -50}, {260, -160}, {-190, -160}, {-190, -58}}, color = {0, 0, 127}));
   connect(grid.y, feedback_confB.u2) annotation(
     Line(points = {{222, -50}, {260, -50}, {260, -160}, {-230, -160}, {-230, 42}}, color = {0, 0, 127}));
-  connect(gain3.y, prim_sec_terz_3.u1) annotation(
+  connect(beta3.y, prim_sec_terz_3.u1) annotation(
     Line(points = {{-50, 19}, {-50, -82}, {-42, -82}}, color = {0, 0, 127}));
   connect(prim_sec_terz_3.y, tf_g3.u) annotation(
     Line(points = {{-19, -90}, {-2, -90}}, color = {0, 0, 127}));
@@ -117,7 +117,7 @@ equation
     Line(points = {{-78, -90}, {-42, -90}}, color = {0, 0, 127}));
   connect(prim_sec_terz_2.y, tf_g2.u) annotation(
     Line(points = {{-59, -50}, {-2, -50}}, color = {0, 0, 127}));
-  connect(gain2.y, prim_sec_terz_2.u1) annotation(
+  connect(beta2.y, prim_sec_terz_2.u1) annotation(
     Line(points = {{-100, 19}, {-100, -42}, {-82, -42}}, color = {0, 0, 127}));
   connect(tf_C2.y, prim_sec_terz_2.u2) annotation(
     Line(points = {{-118, -50}, {-82, -50}}, color = {0, 0, 127}));
@@ -129,7 +129,7 @@ equation
     Line(points = {{22, -10}, {38, -10}}, color = {0, 0, 127}));
   connect(tf_C1.y, prim_sec_terz_1.u2) annotation(
     Line(points = {{-158, -10}, {-142, -10}}, color = {0, 0, 127}));
-  connect(gain1.y, prim_sec_terz_1.u1) annotation(
+  connect(beta1.y, prim_sec_terz_1.u1) annotation(
     Line(points = {{-150, 20}, {-150, -2}, {-142, -2}}, color = {0, 0, 127}));
   connect(prim_sec_terz_1.y, tf_g1.u) annotation(
     Line(points = {{-118, -10}, {-2, -10}}, color = {0, 0, 127}));
